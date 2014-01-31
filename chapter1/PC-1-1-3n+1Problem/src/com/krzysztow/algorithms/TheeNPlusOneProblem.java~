@@ -1,0 +1,27 @@
+package com.krzysztow.algorithms;
+
+import java.util.ArrayList;
+
+public class ThreeNPlus1Problem {
+	public ArrayList<Integer> runProblem(Integer value) {
+		ArrayList<Integer> intermediates = new ArrayList<Integer>();
+		intermediates.append(value);
+		System.out.print("Values: " + value);
+		while (1 != value) {
+			//if n is odd
+			if (0 == n%2) {
+				n = 3 * n + 1;
+			}
+			else {
+				n = n / 2;
+			}
+			intermediates.append(value);
+			//print out new value
+			System.out.print(" " + value);
+		}
+		//just insert new line
+		System.out.println();
+		
+		return intermediates;
+	}
+}

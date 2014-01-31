@@ -1,0 +1,28 @@
+package com.krzysztow.algorithms;
+
+import java.util.ArrayList;
+import java.io.IOException;
+
+public class ThreeNPlus1Problem {
+	public ArrayList<Integer> runProblem(Integer value) {
+		ArrayList<Integer> intermediates = new ArrayList<Integer>();
+		intermediates.add(value);
+		System.out.print("Values: " + value);
+		while (1 != value) {
+			//if n is odd
+			if (0 == value % 2) {
+				value = 3 * value + 1;
+			}
+			else {
+				value = value / 2;
+			}
+			intermediates.add(value);
+			//print out new value
+			System.out.print(" " + value);
+		}
+		//just insert new line
+		System.out.println();
+		
+		return intermediates;
+	}
+}

@@ -52,6 +52,25 @@ ListNode *findNthToLast(ListNode *head, int nthPos) {
     return nthToLastPtr;
 }
 
+ListNode *priv_findNthToLastRecursive(ListNode *node, int *cntRef) {
+    ListNode *n = 0;
+    if (0 != node->next)
+        n = priv_findNthToLastRecursive(node->next, cntRef);
+
+    if (0 == (*cntRef)--) {
+        return node;
+    }
+
+    return n;
+}
+
+ListNode *findNthToLastRecursive(ListNode *head, int nthPos) {
+    if (0 == head)
+        return 0;
+
+    return priv_findNthToLastRecursive(head, &nthPos);
+}
+
 int main(int argc, const char *argv[]) {
     ListNode *head = ln_create(0);
     ListNode *last = ln_append(head, ln_create(1));
@@ -90,6 +109,20 @@ int main(int argc, const char *argv[]) {
 
     ret = findNthToLast(head, 11);
     assert(0 == ret);
+
+    ret = findNthToLastRecursive(head, 1);
+    assert(0 != ret);
+    assert(ret->data == 9);
+
+    ret = findNthToLastRecursive(head, 20);
+    assert(0 == ret);
+
+    ret = findNthToLastRecursive(last, 0);
+    assert(last == ret);
+
+    ret = findNthToLastRecursive(last, 3);
+    assert(0 == ret);
+
 
     printf("Success!\r\n");
 

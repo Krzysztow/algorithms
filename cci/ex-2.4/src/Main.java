@@ -28,7 +28,7 @@ public class Main {
 			return mNumber.size();
 		}
 
-		public LinkedListNumber add(LinkedListNumber other) 
+		public LinkedListNumber add(LinkedListNumber other)
 				throws UnexpectedException {
 			if (this.mBase != other.mBase)
 				throw new UnexpectedException("Cannot use the method to remove the last node of the list.");
@@ -49,31 +49,31 @@ public class Main {
 				}
 
 				this.mNumber.set(i, intermediate);
-				
+
 			}
 
-			if (move) 
+			if (move)
 				this.mNumber.add(1);
 
 			return this;
 		}
-		
-		
+
+
 		@Override
 		public String toString() {
 			StringBuilder b = new StringBuilder("(");
 			Iterator<Integer> it = mNumber.iterator();
-			
+
 			while (it.hasNext()) {
 				b.append(it.next());
 				if (it.hasNext())
 					b.append(" -> ");
 			}
-			
+
 			b.append(")");
-			
+
 			return b.toString();
-			
+
 		}
 	}
 
@@ -81,9 +81,13 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+        if (2 != args.length) {
+            System.err.println("Usage: <class-name> <first-no> <second-no>");
+            return;
+        }
 
-		LinkedListNumber n1 = new LinkedListNumber(513);
-		LinkedListNumber n2 = new LinkedListNumber(995);
+		LinkedListNumber n1 = new LinkedListNumber(Integer.parseInt(args[0]));
+		LinkedListNumber n2 = new LinkedListNumber(Integer.parseInt(args[1]));
 
 		try {
 		System.out.println(n1 + " + " + n2 + " = " + n1.add(n2));

@@ -28,15 +28,15 @@ typedef struct {
     int _size;
     ListNode **_freeListPtr;
     ListNode *_head;
-} ArrayStack;
+} ListStack;
 
 int as_size(Stack *stack) {
-    ArrayStack *as = (ArrayStack*)stack;
+    ListStack *as = (ListStack*)stack;
     return as->_size;
 }
 
 int as_pop(Stack *stack, void *data) {
-    ArrayStack *s = (ArrayStack*)stack;
+    ListStack *s = (ListStack*)stack;
     if (0 == s->_head) {
         return -1;
     }
@@ -55,7 +55,7 @@ int as_pop(Stack *stack, void *data) {
 }
 
 int as_push(Stack *stack, void *data) {
-    ArrayStack *s = (ArrayStack*)stack;
+    ListStack *s = (ListStack*)stack;
 
     if (0 == *(s->_freeListPtr)) {//no free space
         return -1;
@@ -102,7 +102,7 @@ ListNode *listFromBuffer(void *buffer, int bufferSize, int dataItemSize) {
     return head;
 }
 
-void as_init(ArrayStack *stack, int dataItemSize, ListNode **freeListPtr) {
+void as_init(ListStack *stack, int dataItemSize, ListNode **freeListPtr) {
     stack->base.push = as_push;
     stack->base.pop = as_pop;
     stack->base.size = as_size;
@@ -122,7 +122,7 @@ int main(int argc, const char *argv[]) {
     char buffer[BufferSize];
     ListNode *list = listFromBuffer(buffer, BufferSize, sizeof(int));
 
-    ArrayStack as;
+    ListStack as;
     as_init(&as, sizeof(int), &list);
 
     Stack *s = (Stack*)&as;//could be also s = &(as.base)

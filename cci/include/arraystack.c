@@ -16,6 +16,17 @@ int as_pop(Stack *stack, void *data) {
 	return 0;
 }
 
+int as_peek(Stack *stack, void *data) {
+	ArrayStack *s = (ArrayStack*)stack;
+	if (0 == as_size(stack))
+		return -1;
+	
+	void *d = (s->_arrayPtr + ((s->_size - 1) * s->_dataItemSize));
+	memcpy(data, d, s->_dataItemSize);
+	
+	return 0;
+}
+
 int as_push(Stack *stack, void *data) {
 	ArrayStack *s = (ArrayStack*)stack;
 	if (s->_capacity == s->_size) {
@@ -40,6 +51,7 @@ void as_priv_init(ArrayStack *stack, int dataItemSize, int capacity, void *array
 	s->base.pop = as_pop;
 	s->base.push = as_push;
 	s->base.size = as_size;
+	s->base.peek = as_peek;
 	
 	s->_size = 0;
 	s->_ownedArray = ownedPtr;

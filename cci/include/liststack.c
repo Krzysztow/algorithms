@@ -27,6 +27,16 @@ int ls_pop(Stack *stack, void *data) {
     return 0;
 }
 
+int ls_peek(Stack *stack, void *data) {
+    ListStack *s = (ListStack*)stack;
+    if (0 == s->_head) {
+        return -1;
+    }
+		
+	memcpy(data, s->_head->data, s->_nodeDataSize);
+	return 0;
+}
+
 int ls_push(Stack *stack, void *data) {
     ListStack *s = (ListStack*)stack;
 
@@ -53,6 +63,7 @@ void ls_priv_init(ListStack *stack, int dataItemSize, ListNode **freeListPtr, Li
     stack->base.push = ls_push;
     stack->base.pop = ls_pop;
     stack->base.size = ls_size;
+    stack->base.peek = ls_peek;
 
     stack->_nodeDataSize = dataItemSize;
     stack->_size = 0;
